@@ -12,7 +12,7 @@
 #include "camera.h"
 #include "globals.h"
 
-// the screen size
+// delgetsiin hemjees
 int screenWidth, screenHeight;
 
 // The TGA texture containing the help dialogue and starfield and moon texture
@@ -93,7 +93,7 @@ void init(void) {
 	glDisable(GL_LIGHTING);
 
 	// Load all image data
-	help = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/help.tga");
+	//help = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/help.tga");
 	stars = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/stars4.tga");
 	moon = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/moon.tga");
 
@@ -203,7 +203,7 @@ void display(void) {
 	glLoadIdentity();
 
 	// draw the help dialogue
-	if (helpDialogue) {
+	/*if (helpDialogue) {
 		glBindTexture(GL_TEXTURE_2D, help->getTextureHandle());
 		glBegin(GL_QUADS);
 			glTexCoord2f(0.0f, 0.0f);	glVertex2f(0.0f, 0.0f);
@@ -211,7 +211,7 @@ void display(void) {
 			glTexCoord2f(1.0f, 1.0f);	glVertex2f(512.0f, 512.0f);
 			glTexCoord2f(0.0f, 1.0f);	glVertex2f(0.0f, 512.0f);
 		glEnd();
-	}
+	}*/
 
 	glFlush();
 	glutSwapBuffers();

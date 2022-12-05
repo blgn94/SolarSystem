@@ -1,5 +1,5 @@
-#ifndef RYAN_CAMERA_H
-#define RYAN_CAMERA_H
+#ifndef SOLARSYSTEM_CAMERA_H
+#define SOLARSYSTEM_CAMERA_H
 
 class Camera {
 private:

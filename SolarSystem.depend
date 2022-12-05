@@ -6,7 +6,7 @@
 	<cmath>
 	"camera.h"
 
-1669992135 c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\camera.h
+1670216626 c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\camera.h
 
 1669993833 source:c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\moon.cpp
 	"moon.h"
@@ -37,7 +37,7 @@
 
 1669878129 c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\globals.h
 
-1669994218 source:c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\tga.cpp
+1670217498 source:c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\tga.cpp
 	"tga.h"
 	<cstdio>
 	<cstdlib>
@@ -73,7 +73,7 @@
 	<vector>
 	"planet.h"
 
-1669991092 source:c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\main.cpp
+1670217462 source:c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\main.cpp
 	<cmath>
 	<cstdlib>
 	<Windows.h>
