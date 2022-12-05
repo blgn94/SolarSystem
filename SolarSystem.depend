@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1669992932 source:c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\camera.cpp
+1670223243 source:c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\camera.cpp
 	<Windows.h>
 	<gl\GL.h>
 	<gl\GLU.h>
@@ -73,7 +73,7 @@
 	<vector>
 	"planet.h"
 
-1670217462 source:c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\main.cpp
+1670223920 source:c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\main.cpp
 	<cmath>
 	<cstdlib>
 	<Windows.h>

@@ -94,7 +94,7 @@ void init(void) {
 
 	// Load all image data
 	//help = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/help.tga");
-	stars = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/stars4.tga");
+	stars = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/stars.tga");
 	moon = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/moon.tga");
 
 	TGA* sun = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/sun.tga");
@@ -213,6 +213,11 @@ void display(void) {
 		glEnd();
 	}*/
 
+	controls.yawLeft = false;
+	controls.yawRight = false;
+	controls.pitchDown = false;
+	controls.pitchUp = false;
+
 	glFlush();
 	glutSwapBuffers();
 }
@@ -272,10 +277,12 @@ void keyDown(unsigned char key, int x, int y) {
             controls.right = true;
             break;
         case 'l':
-            controls.rollRight = true;
+            controls.yawRight = true;
+            //controls.rollRight = true;
             break;
         case 'j':
-            controls.rollLeft = true;
+            controls.yawLeft = true;
+            //controls.rollLeft = true;
             break;
         case 'i':
             controls.pitchDown = true;
@@ -283,12 +290,12 @@ void keyDown(unsigned char key, int x, int y) {
         case 'k':
             controls.pitchUp = true;
             break;
-        case 'q':
+        /*case 'q':
             controls.yawLeft = true;
             break;
         case 'e':
             controls.yawRight = true;
-            break;
+            break;*/
         }
 }
 
@@ -307,10 +314,12 @@ void keyUp(unsigned char key, int x, int y) {
             controls.right = false;
             break;
         case 'l':
-            controls.rollRight = false;
+            controls.yawRight = false;
+            //controls.rollRight = false;
             break;
         case 'j':
-            controls.rollLeft = false;
+            controls.yawLeft = false;
+            //controls.rollLeft = false;
             break;
         case 'i':
             controls.pitchDown = false;
@@ -318,12 +327,12 @@ void keyUp(unsigned char key, int x, int y) {
         case 'k':
             controls.pitchUp = false;
             break;
-        case 'q':
+        /*case 'q':
             controls.yawLeft = false;
             break;
         case 'e':
             controls.yawRight = false;
-            break;
+            break;*/
 	}
 }
 
@@ -331,6 +340,34 @@ void reshape(int w, int h) {
 	screenWidth = w;
 	screenHeight = h;
 	glViewport (0, 0, (GLsizei)w, (GLsizei)h);
+}
+
+int mouseX = 600, mouseY = 350;
+double yLimit = 350;
+
+void Mouse(int x, int y) {
+    if(x < mouseX) {
+        controls.yawLeft = true;
+    }
+    if(x > mouseX) {
+        controls.yawRight = true;
+    }
+    if(y > mouseY) {
+        if(yLimit > 0) {
+            controls.pitchDown = true;
+            yLimit -= 0.7;
+        }
+    }
+    if(y < mouseY) {
+        if(yLimit < 700) {
+            controls.pitchUp = true;
+            yLimit += 0.7;
+        }
+    }
+    glutWarpPointer(1200 / 2, 700 / 2);
+    //mouseX = x;
+    //mouseY = y;
+    glutPostRedisplay();
 }
 
 int main(int argc, char** argv) {
@@ -342,43 +379,49 @@ int main(int argc, char** argv) {
 	init();
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
+	//glutSetCursor(GLUT_CURSOR_NONE);
 	glutKeyboardFunc(keyDown);
 	glutKeyboardUpFunc(keyUp);
+	glutPassiveMotionFunc(Mouse);
+	//glutMotionFunc(Mouse);
 	glutMainLoop();
 	return 0;
 }
 
 void drawCube(void) {
-	glBegin(GL_QUADS);
-        // new face
+    GLUquadricObj* quadric = gluNewQuadric();
+	gluQuadricTexture(quadric, true);
+	gluQuadricNormals(quadric, GLU_SMOOTH);
+	gluSphere(quadric, 1, 30, 30);
+	/*glBegin(GL_QUADS);
         glTexCoord2f(0.0f, 0.0f);	glVertex3f(-1.0f, -1.0f, 1.0f);
         glTexCoord2f(1.0f, 0.0f);	glVertex3f(1.0f, -1.0f, 1.0f);
         glTexCoord2f(1.0f, 1.0f);	glVertex3f(1.0f, 1.0f, 1.0f);
         glTexCoord2f(0.0f, 1.0f);	glVertex3f(-1.0f, 1.0f, 1.0f);
-        // new face
+
         glTexCoord2f(0.0f, 0.0f);	glVertex3f(1.0f, 1.0f, 1.0f);
         glTexCoord2f(1.0f, 0.0f);	glVertex3f(1.0f, 1.0f, -1.0f);
         glTexCoord2f(1.0f, 1.0f);	glVertex3f(1.0f, -1.0f, -1.0f);
         glTexCoord2f(0.0f, 1.0f);	glVertex3f(1.0f, -1.0f, 1.0f);
-        // new face
+
         glTexCoord2f(0.0f, 0.0f);	glVertex3f(1.0f, 1.0f, -1.0f);
         glTexCoord2f(1.0f, 0.0f);	glVertex3f(-1.0f, 1.0f, -1.0f);
         glTexCoord2f(1.0f, 1.0f);	glVertex3f(-1.0f, -1.0f, -1.0f);
         glTexCoord2f(0.0f, 1.0f);	glVertex3f(1.0f, -1.0f, -1.0f);
-        // new face
+
         glTexCoord2f(0.0f, 0.0f);	glVertex3f(-1.0f, -1.0f, -1.0f);
         glTexCoord2f(1.0f, 0.0f);	glVertex3f(-1.0f, -1.0f, 1.0f);
         glTexCoord2f(1.0f, 1.0f);	glVertex3f(-1.0f, 1.0f, 1.0f);
         glTexCoord2f(0.0f, 1.0f);	glVertex3f(-1.0f, 1.0f, -1.0f);
-        // new face
+
         glTexCoord2f(0.0f, 0.0f);	glVertex3f(-1.0f, 1.0f, -1.0f);
         glTexCoord2f(1.0f, 0.0f);	glVertex3f(1.0f, 1.0f, -1.0f);
         glTexCoord2f(1.0f, 1.0f);	glVertex3f(1.0f, 1.0f, 1.0f);
         glTexCoord2f(0.0f, 1.0f);	glVertex3f(-1.0f, 1.0f, 1.0f);
-        // new face
+
         glTexCoord2f(0.0f, 0.0f);	glVertex3f(-1.0f, -1.0f, -1.0f);
         glTexCoord2f(1.0f, 0.0f);	glVertex3f(1.0f, -1.0f, -1.0f);
         glTexCoord2f(1.0f, 1.0f);	glVertex3f(1.0f, -1.0f, 1.0f);
         glTexCoord2f(0.0f, 1.0f);	glVertex3f(-1.0f, -1.0f, 1.0f);
-	glEnd();
+	glEnd();*/
 }

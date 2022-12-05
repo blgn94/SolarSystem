@@ -6,7 +6,6 @@
 #include <cmath>
 #include "camera.h"
 
-
 // my camera system i envisioned to be controlled kinda like a spaceship
 // so the keyboard would manipulate roll and direction and move around
 // so im representing it with 4 vectors
@@ -92,7 +91,7 @@ void rotateAroundVec(float* v1, float* v2, float angle, float* v3) {
 
 Camera::Camera(void) {
 	cameraSpeed = 0.005f;
-	cameraTurnSpeed = 0.01f;
+	cameraTurnSpeed = 0.003f;
 	// set default vector values - obtained a nice viewing angle of the planets, got values using the debugger
 	/*		forwardVec	0x00ab354c {-0.398769796, 0.763009906, -0.508720219}	float[3]
 +		upVec	0x00ab3564 {-0.235630989, 0.450859368, 0.860931039}	float[3]
