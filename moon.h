@@ -1,5 +1,5 @@
-#ifndef RYAN_MOON_H
-#define RYAN_MOON_H
+#ifndef SOLARSYSTEM_MOON_H
+#define SOLARSYSTEM_MOON_H
 
 #ifdef _WIN32
 #include <Windows.h>

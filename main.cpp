@@ -1,8 +1,8 @@
 #include <cmath>
 #include <cstdlib>
-#ifdef _WIN32
+/*#ifdef _WIN32
 #include <Windows.h>
-#endif
+#endif*/
 #include <gl\gl.h>
 #include <gl\glut.h>
 #include <GL\glu.h>
@@ -15,46 +15,44 @@
 // delgetsiin hemjees
 int screenWidth, screenHeight;
 
-// The TGA texture containing the help dialogue and starfield and moon texture
-TGA* help, *stars, * moon;
-// toggles if the help dialogue is enabled
-bool helpDialogue = true;
+// TGA classiin objectuud
+TGA *help, *stars, *moon;
+// Zaavriin zurgiin haragdah esehiig hadgalah boolean huvisagch
+bool helpDialogue = false;
 // toggles if orbits are drawn
 bool showOrbits = true;
-// holds the index of the last planet that was selected with the 1 to 9 number keys
+// 1-ees 9 hurtel dugaartai gariguudiig songoson esehiig hadgalah huvisagch
 int planetSelected = 1;
 
-// The main instance of the solar system
+// Solarsystem classiing object
 SolarSystem solarSystem;
 
-// The instance of the camera
+// Camera classiin object
 Camera camera;
 
-// These control the simulation of time
+// hugatsaanii simulation-nii huvisagchid
 double time;
 double timeSpeed;
 
-// holds the state of the controls for the camera - when true, the key for that control is being pressed
+// delgetsiin camera hodloh esehiig shiideh boolean utguud
 struct ControlStates {
-	bool forward, backward, left, right, yawLeft, yawRight, pitchUp,
-		pitchDown, rollLeft, rollRight;
+	bool forward, backward, left, right, yawLeft, yawRight, pitchUp, pitchDown, rollLeft, rollRight;
 } controls;
 
-
-// timer function called every 10ms or more
+// 10ms bolgon timer function duudagdana
 void timer(int) {
-	glutPostRedisplay(); // post for display func
-	glutTimerFunc(10, timer, 0); // limit frame drawing to 100fps
+	glutPostRedisplay(); // display() function-iig dahij duudah function
+	glutTimerFunc(10, timer, 0); // frame zurahiig 100fps-eer hyzgaarlaj baigaa
 }
 
-// creates a random number up to the max specified
+// max too hurtel random too gargah function
 float random(float max) {
 	return (float)(std::rand() % 1000) * max * 0.001;
 }
 
-// adds a moon to the selected planet
+// Songogdson garigt sar nemej ogoh function
 void addMoon() {
-	// make a moon using random values
+	// random utguudiig ashiglaj sariig uusgej baigaa
 	solarSystem.addMoon(planetSelected,
 		(500 + random(1500)) * solarSystem.getRadiusOfPlanet(planetSelected),
 		10 + random(100), 0.5 + random(20),
@@ -66,7 +64,7 @@ void init(void) {
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_TEXTURE_2D);
 
-	// set up lighting
+	// Gerliin tootsoo
 	glEnable(GL_LIGHTING);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -92,15 +90,15 @@ void init(void) {
 	glEnable(GL_LIGHT0);
 	glDisable(GL_LIGHTING);
 
-	// Load all image data
-	//help = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/help.tga");
-	stars = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/stars.tga");
+	// Zurgiin data-g unshih code (TGA classiin objectuudiig garig bolgon deer uusgeh)
+	help = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/help.tga");
+	stars = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/stars6.tga");
 	moon = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/moon.tga");
 
+	TGA* earth = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/earth.tga");
 	TGA* sun = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/sun.tga");
 	TGA* mercury = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/mercury.tga");
 	TGA* venus = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/venus.tga");
-	TGA* earth = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/earth.tga");
 	TGA* mars = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/mars.tga");
 	TGA* jupiter = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/jupiter.tga");
 	TGA* saturn = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/saturn.tga");
@@ -108,7 +106,7 @@ void init(void) {
 	TGA* neptune = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/neptune.tga");
 	TGA* pluto = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/pluto.tga");
 
-	// Add all the planets with accurate data. Distance measured in km, time measured in earth days.
+	// Gariguudiig SolarSystem-d nemej baigaa, Zaig km-eer, Hugatsaag odroor geh met.
 	solarSystem.addPlanet(0, 1, 500, 695500, sun->getTextureHandle()); // sun
 	solarSystem.addPlanet(57910000, 88, 58.6, 2440, mercury->getTextureHandle()); // mercury
 	solarSystem.addPlanet(108200000, 224.65, 243, 6052, venus->getTextureHandle()); // venus
@@ -122,11 +120,11 @@ void init(void) {
 
 	solarSystem.addMoon(3, 7000000, 27.3, 27.3, 1738, moon->getTextureHandle()); // test moon for the earth
 
-	// set up time
+	// Hugatsaag tohiruulah
 	time = 2.552f;
 	timeSpeed = 0.1f;
 
-	// reset controls
+	// Controlleruudiig reset hiih
 	controls.forward = false;
 	controls.backward = false;
 	controls.left = false;
@@ -141,10 +139,11 @@ void init(void) {
 	timer(0);
 }
 
-void drawCube(void);
+// Orchinoo beldeh function
+void drawGalaxy(void);
 
 void display(void) {
-	// update the logic and simulation
+	// Simulation-iig zurah bolgondoo update hiih
 	time += timeSpeed;
 	solarSystem.calculatePositions(time);
 
@@ -154,56 +153,51 @@ void display(void) {
 	if(controls.rollLeft) camera.rollLeft();	if(controls.rollRight) camera.rollRight();
 	if(controls.pitchUp) camera.pitchUp();		if(controls.pitchDown) camera.pitchDown();
 
-	// clear the buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glColor3f(1.0, 1.0, 1.0);
 
-
-	// set up the perspective matrix for rendering the 3d world
+	// 3d orchinoo render hiihed zoriulj perspective matrixaa tohiruulah
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(70.0f, (float)screenWidth/(float)screenHeight, 0.001f, 500.0f);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-
-	// perform the camera orientation transform
+	// Camera-iin orientation huvirgaltiig guitsetgeh
 	camera.transformOrientation();
 
-	// draw the skybox
+	// Galaxy orchinoo beldeeh
 	glBindTexture(GL_TEXTURE_2D, stars->getTextureHandle());
-	drawCube();
+	drawGalaxy();
 
-	// perform the camera translation transform
+	// Camera-iin translation huvirgaltiig guitsetgeh
 	camera.transformTranslation();
-
-
 
 	GLfloat lightPosition[] = { 0.0, 0.0, 0.0, 1.0 };
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
 
-	// render the solar system
+	// Narnii system-iig renderleh
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
 
 	solarSystem.render();
 	glDisable(GL_LIGHTING);
 
-	// possibly render orbits
+	// garig bolgonii orbit-iig renderleh
 	if(showOrbits)
 		solarSystem.renderOrbits();
 
 	glDisable(GL_DEPTH_TEST);
 
-	// set up ortho matrix for showing the UI (help dialogue)
+	// User Interface-iig haruulah ortho matritsiig tohiruulah (Zaavriin zurag)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluOrtho2D(0.0, (GLdouble) screenWidth, (GLdouble) screenHeight, 0.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	// draw the help dialogue
-	/*if (helpDialogue) {
+	// Zaavriin zurgiig zurah
+	if (helpDialogue) {
 		glBindTexture(GL_TEXTURE_2D, help->getTextureHandle());
 		glBegin(GL_QUADS);
 			glTexCoord2f(0.0f, 0.0f);	glVertex2f(0.0f, 0.0f);
@@ -211,7 +205,7 @@ void display(void) {
 			glTexCoord2f(1.0f, 1.0f);	glVertex2f(512.0f, 512.0f);
 			glTexCoord2f(0.0f, 1.0f);	glVertex2f(0.0f, 512.0f);
 		glEnd();
-	}*/
+	}
 
 	controls.yawLeft = false;
 	controls.yawRight = false;
@@ -222,48 +216,44 @@ void display(void) {
 	glutSwapBuffers();
 }
 void keyDown(unsigned char key, int x, int y) {
-	// check for numerical keys
 	if (key > '0' && key <= '9') {
-		// point at the specified planet
 		float vec[3];
 		solarSystem.getPlanetPosition(key - '0', vec);
 		camera.pointAt(vec);
 
-		// select that planet
 		planetSelected = key - '0';
 	}
 	switch (key) {
         case '-':
-            timeSpeed /= 2.0f; // half the rate of time passing
+            timeSpeed /= 2.0f; // Tsag hugatsaag 2 dahin bagasgah
             break;
         case '=':
-            timeSpeed *= 2.0f; // double the rate of time passing
+            timeSpeed *= 2.0f; // Tsag hugatsaag 2 dahin hurdluulah
             break;
         case 'h':
-            helpDialogue = !helpDialogue; // toggle the dialogue
+            helpDialogue = !helpDialogue; // Zaavriin zurgiig toggle hiih
             break;
         case '[':
-            planetSizeScale /= 1.2; // make planet scale smaller
+            planetSizeScale /= 1.2; // Garigsiig jijigruuleh
             break;
         case ']':
-            planetSizeScale *= 1.2; // make planet scale bigger
+            planetSizeScale *= 1.2; // Garigsiig tomruulah
             break;
         case 'o':
-            showOrbits = !showOrbits; // toggle show orbits
+            showOrbits = !showOrbits; // Garigsiin orbit-iig toggle hiih
             break;
         case 'm':
-            addMoon(); // add a moon to the selected planet
+            addMoon(); // songogdson garigt sar nemeh
             break;
         case 'r':
             planetSizeScale = distanceScale;
             break;
         case ',':
-            camera.slowDown(); // slow down camera
+            camera.slowDown(); // camera-nii hurdiig 2 dahin bagasgah
             break;
         case '.':
-            camera.speedUp(); // speed up camera
+            camera.speedUp(); // camera-nii hurdiig 2 dahin hurdasgah
             break;
-            // these are all camera controls
         case 'w':
             controls.forward = true;
             break;
@@ -388,7 +378,7 @@ int main(int argc, char** argv) {
 	return 0;
 }
 
-void drawCube(void) {
+void drawGalaxy(void) {
     GLUquadricObj* quadric = gluNewQuadric();
 	gluQuadricTexture(quadric, true);
 	gluQuadricNormals(quadric, GLU_SMOOTH);

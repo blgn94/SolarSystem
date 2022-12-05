@@ -1,5 +1,5 @@
-#ifndef RYAN_PLANET_H
-#define RYAN_PLANET_H
+#ifndef SOLARSYSTEM_PLANET_H
+#define SOLARSYSTEM_PLANET_H
 
 #ifdef _WIN32
 #include <Windows.h>

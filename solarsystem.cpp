@@ -1,7 +1,6 @@
 #include "solarsystem.h"
 
-SolarSystem::SolarSystem()
-{
+SolarSystem::SolarSystem(){
 
 }
 

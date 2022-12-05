@@ -8,8 +8,7 @@
 #include <gl\GL.h>
 #include <gl\GLU.h>
 
-// define the header struct for
-// loading the TGA header info.
+// define the header struct for loading the TGA header info.
 #pragma pack(1) // pack it so that I can have shorts & chars in sequence and read directly from file memory
 struct TGAHeader{
     char    id_length;
@@ -148,6 +147,60 @@ TGA::TGA(char* imagePath) {
 	// delete the pixel data
 	free(pixels);
 }
+
+/*TGA::TGA(char *filename) {
+    int i, j = 0;
+    FILE *l_file;
+    BYTE *l_texture;
+
+    TGAHeader header;
+
+    BITMAPFILEHEADER fileheader;
+    BITMAPINFOHEADER infoheader;
+    RGBTRIPLE rgb;
+
+    textureHandle++;
+
+    //if((l_file = fopen(filename, "rb")) == NULL)
+    //    return(-1);
+
+    fread(&fileheader, sizeof(fileheader), 1, l_file);
+
+    fseek(l_file, sizeof(fileheader), SEEK_SET);
+    fread(&header, sizeof(header), 1, l_file);
+
+    l_texture = (BYTE*)malloc(header.width * header.height * 4);
+
+    memset(l_texture, 0, header.width * header.height * 4);
+
+    for(i=0; i < header.width * header.height; i++) {
+        fread(&rgb, sizeof(rgb), 1, l_file);
+        l_texture[j+0] = rgb.rgbtRed;
+        l_texture[j+1] = rgb.rgbtGreen;
+        l_texture[j+2] = rgb.rgbtBlue;
+        l_texture[j+3] = 255;
+        j += 4;
+    }
+
+    fclose(l_file);
+
+    glGenTextures(1, &textureHandle);
+    glBindTexture(GL_TEXTURE_2D, textureHandle);
+
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, GL_REPLACE);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, 4, header.width, header.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, l_texture);
+
+    gluBuild2DMipmaps(GL_TEXTURE_2D, 4, header.width, header.height, GL_RGBA, GL_UNSIGNED_BYTE, l_texture);
+
+    free(l_texture);
+    //return(num_texture);
+}*/
 
 GLuint TGA::getTextureHandle(void) {
 	return textureHandle;

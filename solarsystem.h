@@ -1,5 +1,5 @@
-#ifndef RYAN_SOLARSYSTEM_H
-#define RYAN_SOLARSYSTEM_H
+#ifndef SOLARSYSTEM_SOLARSYSTEM_H
+#define SOLARSYSTEM_SOLARSYSTEM_H
 
 #ifdef _WIN32
 #include <Windows.h>

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1670223243 source:c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\camera.cpp
+1670237912 source:c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\camera.cpp
 	<Windows.h>
 	<gl\GL.h>
 	<gl\GLU.h>
@@ -17,7 +17,7 @@
 	<gl\glut.h>
 	"globals.h"
 
-1669993854 c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\moon.h
+1670237864 c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\moon.h
 	<Windows.h>
 	<gl\GL.h>
 
@@ -35,9 +35,9 @@
 	<GL/glu.h>
 	<stdlib.h>
 
-1669878129 c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\globals.h
+1670237864 c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\globals.h
 
-1670217498 source:c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\tga.cpp
+1670240871 source:c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\tga.cpp
 	"tga.h"
 	<cstdio>
 	<cstdlib>
@@ -45,7 +45,7 @@
 	<gl\GL.h>
 	<gl\GLU.h>
 
-1669993874 c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\tga.h
+1670238356 c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\tga.h
 	<Windows.h>
 	<gl\GL.h>
 
@@ -58,22 +58,22 @@
 	<gl\glut.h>
 	"globals.h"
 
-1669993699 c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\planet.h
+1670237811 c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\planet.h
 	<Windows.h>
 	<gl\GL.h>
 	<vector>
 	"moon.h"
 
-1669993278 source:c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\solarsystem.cpp
+1670241125 source:c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\solarsystem.cpp
 	"solarsystem.h"
 
-1669993303 c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\solarsystem.h
+1670237779 c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\solarsystem.h
 	<Windows.h>
 	<gl\GL.h>
 	<vector>
 	"planet.h"
 
-1670223920 source:c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\main.cpp
+1670239250 source:c:\users\user\onedrive - national university of mongolia\desktop\muis\3-r kurs\1) namriin uliral\computer graphics\laboratories\solarsystem\main.cpp
 	<cmath>
 	<cstdlib>
 	<Windows.h>
