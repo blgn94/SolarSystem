@@ -12,6 +12,9 @@
 #include "camera.h"
 #include "globals.h"
 
+int mouseMoveX = 0;
+int mouseMoveY = 0;
+
 // delgetsiin hemjees
 int screenWidth, screenHeight;
 
@@ -91,20 +94,20 @@ void init(void) {
 	glDisable(GL_LIGHTING);
 
 	// Zurgiin data-g unshih code (TGA classiin objectuudiig garig bolgon deer uusgeh)
-	help = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/help.tga");
-	stars = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/stars6.tga");
-	moon = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/moon.tga");
+	help = new TGA("C:/Users/Encold/Desktop/3-1/Computer graphics/SolarSystemProject/SolarSystem/images/help.tga");
+	stars = new TGA("C:/Users/Encold/Desktop/3-1/Computer graphics/SolarSystemProject/SolarSystem/images/stars6.tga");
+	moon = new TGA("C:/Users/Encold/Desktop/3-1/Computer graphics/SolarSystemProject/SolarSystem/images/moon.tga");
 
-	TGA* earth = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/earth.tga");
-	TGA* sun = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/sun.tga");
-	TGA* mercury = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/mercury.tga");
-	TGA* venus = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/venus.tga");
-	TGA* mars = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/mars.tga");
-	TGA* jupiter = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/jupiter.tga");
-	TGA* saturn = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/saturn.tga");
-	TGA* uranus = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/uranus.tga");
-	TGA* neptune = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/neptune.tga");
-	TGA* pluto = new TGA("C:/Users/User/OneDrive - National University of Mongolia/Desktop/MUIS/3-r kurs/1) Namriin uliral/Computer graphics/laboratories/SolarSystem/images/pluto.tga");
+	TGA* earth = new TGA("C:/Users/Encold/Desktop/3-1/Computer graphics/SolarSystemProject/SolarSystem/images/earth.tga");
+	TGA* sun = new TGA("C:/Users/Encold/Desktop/3-1/Computer graphics/SolarSystemProject/SolarSystem/images/sun.tga");
+	TGA* mercury = new TGA("C:/Users/Encold/Desktop/3-1/Computer graphics/SolarSystemProject/SolarSystem/images/mercury.tga");
+	TGA* venus = new TGA("C:/Users/Encold/Desktop/3-1/Computer graphics/SolarSystemProject/SolarSystem/images/venus.tga");
+	TGA* mars = new TGA("C:/Users/Encold/Desktop/3-1/Computer graphics/SolarSystemProject/SolarSystem/images/mars.tga");
+	TGA* jupiter = new TGA("C:/Users/Encold/Desktop/3-1/Computer graphics/SolarSystemProject/SolarSystem/images/jupiter.tga");
+	TGA* saturn = new TGA("C:/Users/Encold/Desktop/3-1/Computer graphics/SolarSystemProject/SolarSystem/images/saturn.tga");
+	TGA* uranus = new TGA("C:/Users/Encold/Desktop/3-1/Computer graphics/SolarSystemProject/SolarSystem/images/uranus.tga");
+	TGA* neptune = new TGA("C:/Users/Encold/Desktop/3-1/Computer graphics/SolarSystemProject/SolarSystem/images/neptune.tga");
+	TGA* pluto = new TGA("C:/Users/Encold/Desktop/3-1/Computer graphics/SolarSystemProject/SolarSystem/images/pluto.tga");
 
 	// Gariguudiig SolarSystem-d nemej baigaa, Zaig km-eer, Hugatsaag odroor geh met.
 	solarSystem.addPlanet(0, 1, 500, 695500, sun->getTextureHandle()); // sun
@@ -149,9 +152,10 @@ void display(void) {
 
 	if(controls.forward) camera.forward();		if(controls.backward) camera.backward();
 	if(controls.left) camera.left();			if(controls.right) camera.right();
-	if(controls.yawLeft) camera.yawLeft();		if(controls.yawRight) camera.yawRight();
-	if(controls.rollLeft) camera.rollLeft();	if(controls.rollRight) camera.rollRight();
-	if(controls.pitchUp) camera.pitchUp();		if(controls.pitchDown) camera.pitchDown();
+	//Mouse Movements
+	if(controls.yawLeft) camera.yawLeft(mouseMoveX);		if(controls.yawRight) camera.yawRight(mouseMoveX);
+	//if(controls.rollLeft) camera.rollLeft();	if(controls.rollRight) camera.rollRight();
+	if(controls.pitchUp) camera.pitchUp(mouseMoveY);		if(controls.pitchDown) camera.pitchDown(mouseMoveY);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glColor3f(1.0, 1.0, 1.0);
@@ -336,6 +340,8 @@ int mouseX = 600, mouseY = 350;
 double yLimit = 350;
 
 void Mouse(int x, int y) {
+    mouseMoveX = x - mouseX;
+    mouseMoveY = y - mouseY;
     if(x < mouseX) {
         controls.yawLeft = true;
     }
@@ -369,7 +375,7 @@ int main(int argc, char** argv) {
 	init();
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);
-	//glutSetCursor(GLUT_CURSOR_NONE);
+	glutSetCursor(GLUT_CURSOR_NONE);
 	glutKeyboardFunc(keyDown);
 	glutKeyboardUpFunc(keyUp);
 	glutPassiveMotionFunc(Mouse);

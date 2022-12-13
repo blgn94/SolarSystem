@@ -18,6 +18,8 @@ private:
 	// the camera speed
 	float cameraSpeed;
 	float cameraTurnSpeed;
+	float cameraTurnSpeedX;
+	float cameraTurnSpeedY;
 
 public:
 	Camera(void);
@@ -56,16 +58,16 @@ public:
 	void rollLeft(void);
 
 	// pitch the camera up
-	void pitchUp(void);
+	void pitchUp(float);
 
 	// pitch the camera down
-	void pitchDown(void);
+	void pitchDown(float);
 
 	// yaw left
-	void yawLeft(void);
+	void yawLeft(float);
 
 	// yaw right
-	void yawRight(void);
+	void yawRight(float);
 };
 
 #endif

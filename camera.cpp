@@ -4,6 +4,7 @@
 #include <gl\GL.h>
 #include <gl\GLU.h>
 #include <cmath>
+#include <iostream>
 #include "camera.h"
 
 // my camera system i envisioned to be controlled kinda like a spaceship
@@ -221,45 +222,58 @@ void Camera::rollLeft(void) {
 }
 
 // pitch the camera up
-void Camera::pitchUp(void) {
+void Camera::pitchUp(float speedY) {
+    float vel = -speedY / 1000;
+    std::cout << vel<< "\n";
 	float tempVec[3];
 	// rotate the forward and up vectors around the right vector axis for pitch
-	rotateAroundVec(forwardVec, rightVec, cameraTurnSpeed, tempVec);
+	rotateAroundVec(forwardVec, rightVec, vel, tempVec);
+	//rotateAroundVec(forwardVec, rightVec, cameraTurnSpeed, tempVec);
 	vectorCopy(forwardVec, tempVec);
 
-	rotateAroundVec(upVec, rightVec, cameraTurnSpeed, tempVec);
+	rotateAroundVec(upVec, rightVec, vel, tempVec);
+	//rotateAroundVec(upVec, rightVec, cameraTurnSpeed, tempVec);
 	vectorCopy(upVec, tempVec);
 }
 
 // pitch the camera down
-void Camera::pitchDown(void) {
+void Camera::pitchDown(float speedY) {
+    float vel = -speedY / 1000;
 	float tempVec[3];
 	// rotate the forward and up vectors around the right vector axis for pitch
-	rotateAroundVec(forwardVec, rightVec, -cameraTurnSpeed, tempVec);
+	rotateAroundVec(forwardVec, rightVec, vel, tempVec);
+	//rotateAroundVec(forwardVec, rightVec, -cameraTurnSpeed, tempVec);
 	vectorCopy(forwardVec, tempVec);
 
-	rotateAroundVec(upVec, rightVec, -cameraTurnSpeed, tempVec);
+	rotateAroundVec(upVec, rightVec, vel, tempVec);
+	//rotateAroundVec(upVec, rightVec, -cameraTurnSpeed, tempVec);
 	vectorCopy(upVec, tempVec);
 }
 
 // yaw left
-void Camera::yawLeft(void) {
+void Camera::yawLeft(float speedX) {
+    float vel = -speedX / 1000;
 	float tempVec[3];
 	// rotate the forward and right vectors around the up vector axis for yaw
-	rotateAroundVec(forwardVec, upVec, cameraTurnSpeed, tempVec);
+	//rotateAroundVec(forwardVec, upVec, cameraTurnSpeed, tempVec);
+	rotateAroundVec(forwardVec, upVec, vel, tempVec);
 	vectorCopy(forwardVec, tempVec);
 
-	rotateAroundVec(rightVec, upVec, cameraTurnSpeed, tempVec);
+	//rotateAroundVec(rightVec, upVec, cameraTurnSpeed, tempVec);
+	rotateAroundVec(rightVec, upVec, vel, tempVec);
 	vectorCopy(rightVec, tempVec);
 }
 
 // yaw right
-void Camera::yawRight(void) {
+void Camera::yawRight(float speedX) {
+    float vel = -speedX / 1000;
 	float tempVec[3];
 	// rotate the forward and right vectors around the up vector axis for yaw
-	rotateAroundVec(forwardVec, upVec, -cameraTurnSpeed, tempVec);
+	//rotateAroundVec(forwardVec, upVec, -cameraTurnSpeed, tempVec);
+	rotateAroundVec(forwardVec, upVec, vel, tempVec);
 	vectorCopy(forwardVec, tempVec);
 
-	rotateAroundVec(rightVec, upVec, -cameraTurnSpeed, tempVec);
+	//rotateAroundVec(rightVec, upVec, -cameraTurnSpeed, tempVec);
+	rotateAroundVec(rightVec, upVec, vel, tempVec);
 	vectorCopy(rightVec, tempVec);
 }
